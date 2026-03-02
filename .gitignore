@@ -18,3 +18,39 @@ Desktop.ini
 # Environment
 .env
 .env.*
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+
+# Build outputs
+dist/
+build/
+out/
+.vercel/
+.netlify/
+
+# Vite
+*.local
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# Lambda / serverless
+.serverless/
+.aws-sam/
+cdk.out/
+*.zip
+
+# Logs
+logs/
+*.log
+
+# Misc
+.cache/
+.turbo/
