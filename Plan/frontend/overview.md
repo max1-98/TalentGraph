@@ -65,6 +65,14 @@ Recruiter → Search UI → API (POST /search) → Results UI
 Candidate → Dashboard → API (GET /intelligence) → Insights UI
 ```
 
+## Data Shapes
+
+All request and response types (SearchRequest, SearchResult,
+ScoreBreakdownDisplay, UserIntelligenceReport, etc.) are defined in
+`core/schema/api-contracts-core.md` and `core/schema/api-contracts-algorithms.md`.
+The frontend never manually defines API shapes — typed interfaces are generated
+from the shared schema. See `core/schema/overview.md` for the full design.
+
 ## Design Principles
 
 - **Latency transparency:** show a loading indicator during query compilation
@@ -73,3 +81,18 @@ Candidate → Dashboard → API (GET /intelligence) → Insights UI
   interaction, full detail on expansion
 - **Actionable insights:** every number shown should have a plain-language
   explanation and, where possible, a suggested action
+- **Engagement-aware design:** the platform has a daily habit loop (feed) and
+  a weekly match loop; the UI hierarchy reflects this — feed is the default
+  landing view, matches are a distinct premium surface
+- **Unified roles:** the same user can act as candidate and hiring manager
+  within one session; no hard account-type fork
+
+## Frontend File Index
+
+| File | Description |
+|------|-------------|
+| [overview.md](overview.md) | UI structure, data flow, design principles |
+| [layout.md](layout.md) | Nav structure, design aesthetic, mobile-first layout, micro-interactions |
+| [candidate-experience.md](candidate-experience.md) | Feed, match inbox, gap finder, career path, profile, insights |
+| [hiring-experience.md](hiring-experience.md) | Post role, applicant view, multi-role, team-fill |
+| [profile-builder.md](profile-builder.md) | CV import, progressive completion, AI suggestions, privacy controls |

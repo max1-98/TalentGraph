@@ -26,6 +26,7 @@ or interface.
 | Folder               | Maps to                          |
 |----------------------|----------------------------------|
 | `Plan/core/`        | Core traits and shared types     |
+| `Plan/core/schema/` | Shared schema: cross-boundary type definitions |
 | `Plan/scoring/`     | Scoring algorithms               |
 | `Plan/pipeline/`    | Search pipeline stages           |
 | `Plan/compiler/`    | Query compilation                |
@@ -34,7 +35,27 @@ or interface.
 | `Plan/features/`    | Feature modules                  |
 | `Plan/api/`         | Backend API                      |
 | `Plan/frontend/`    | Frontend                         |
+| `Plan/algorithm/`    | Higher-level algorithm skeletons |
 | `Plan/infrastructure/` | Architecture, testing, deploy |
+| `Plan/product/`     | Product strategy, engagement, onboarding |
+
+## Repo Structure — Git Submodules
+
+This is a **meta-repo**. Each app lives in its own GitHub repo and is linked here
+as a git submodule. The root repo tracks docs (`Plan/`, `TODO/`) and submodule
+pointers.
+
+| Path | Repo | Status |
+|------|------|--------|
+| `prototype/` | `talentgraph-prototype` | visual prototype (Vite + React + TS) |
+| `lambda/` (future) | `talentgraph-lambda` | serverless functions |
+| `api/` (future) | `talentgraph-api` | backend API |
+
+**Working with submodules:**
+- Clone with `git clone --recurse-submodules <root-url>`
+- Update all submodules: `git submodule update --remote`
+- Commit changes to an app inside its own folder; then update the pointer in root
+- Add a new app: `git submodule add <repo-url> <folder>`
 
 ## Contribution Workflow
 

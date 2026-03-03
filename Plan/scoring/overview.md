@@ -74,3 +74,21 @@ explainability, and user intelligence features.
 - **Extensibility.** Adding a scorer is a single isolated change: implement
   the Scorer trait, register it, add it to the config. Zero modifications
   to existing scorers or the pipeline.
+
+## Gap-Emphasis Weight Adjustment
+
+For co-founder matching (`algorithm/cofounder-matching/gap-emphasis.md`), the
+standard per-vertical weights are adjusted at runtime via a Bayesian posterior
+that shifts emphasis toward sub-scores where the team has the largest gaps.
+This is implemented as a WeightProvider decorator — the core weight system
+and per-vertical selection are unchanged.
+
+## Relationship to Algorithm Layer
+
+The sub-scores f1–f5 operate on candidate-vs-query pairs in the real-time
+scoring pipeline. The algorithm layer's **ProfileComparator** building block
+(see `algorithm/overview.md`) generalises these same dimensions into structured
+diffs between any two profiles or a profile and a role. This enables gap
+analysis (see `algorithm/gap-finder/overview.md`), co-founder complementarity
+scoring, and career path evaluation — all reusing the scoring logic in an
+offline, richer context where latency constraints are relaxed.

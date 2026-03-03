@@ -84,3 +84,9 @@ User intelligence and the feedback loop (see `learning/feedback.md`) consume
 the same raw data — ScoreBreakdowns. The feedback system uses them to train
 weights; user intelligence uses them to inform candidates. The aggregation
 runs in the same batch pipeline.
+
+The **Highest-Impact Gaps** and **Synergy Gaps** sections above are computed by
+the Gap Finder algorithm (see `algorithm/gap-finder/integration.md`), which
+feeds prioritised gap lists into this module. **Trajectory Insight** connects
+to Career Pathing (see `algorithm/career-pathing/overview.md`), which uses
+peer-based trajectory analysis to contextualise the seniority signal.

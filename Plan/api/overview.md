@@ -72,3 +72,11 @@ engine never sees non-consented profiles.
 
 Search queries are rate-limited per organisation to prevent abuse and
 control LLM compilation costs. Profile updates are rate-limited per user.
+
+## Type Definitions
+
+Canonical definitions for all request and response types (ProfilePayload,
+SearchRequest, SearchResult, FeedbackSignal, etc.) live in
+`core/schema/api-contracts-core.md` and `core/schema/api-contracts-algorithms.md`.
+The API layer validates payloads against schemas compiled from those definitions.
+See `core/schema/overview.md` for the full shared schema design.

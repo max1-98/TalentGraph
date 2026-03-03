@@ -70,3 +70,20 @@ is included in the cache key and in search diagnostics, ensuring that:
   multilingual capabilities; the rule-based fallback is English-only
 - **Extremely long JD:** truncated to the model's context window; the
   embedding is computed from the truncated text
+
+## Pre-Compilation for Role Recommendation
+
+The same compilation pipeline is used in batch mode by the Role Recommendation
+algorithm (`algorithm/role-recommendation/compilation.md`) to pre-compile all
+active role descriptions into QueryTensors. Pre-compiled tensors are stored in
+a RoleTensorStore and kept fresh via a version triple and TTL safety net,
+enabling real-time role recommendation with no query-time compilation cost.
+
+## Relationship to Algorithm Layer
+
+Step 2's skill-mapping logic (free-text to canonical taxonomy IDs) is an
+instance of the **SkillResolver** shared building block defined in the
+algorithm layer (see `algorithm/overview.md`). The same trait is reused by
+CV-to-Profile and Profile Enrichment. **RoleContextAnalyser** extends this
+compiler's extraction for richer, offline (non-latency-bound) role analysis
+used by Gap Finder, Career Pathing, and Role Recommendation.

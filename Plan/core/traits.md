@@ -91,3 +91,19 @@ Supplies the scoring weight vector for a given query.
 All modules depend on these traits. No module depends on another module's
 concrete type. The only place concrete types appear is the composition root
 (the pipeline builder), which wires implementations to traits at startup.
+
+## Algorithm Layer Traits
+
+The algorithm layer (see `algorithm/overview.md`) introduces five additional
+shared traits — building blocks reused across multiple algorithms:
+
+- **SkillResolver** — maps free-text skill mentions to canonical taxonomy IDs
+- **TaxonomyGraph** — living ontology of skill nodes and relationship edges
+- **RoleContextAnalyser** — extracts structured requirements from role descriptions
+- **ProfileComparator** — computes structured diffs between two profiles or a
+  profile and a role
+- **MarketSignalProvider** — aggregates skill demand, salary ranges, and trends
+
+These follow the same contract pattern as the core traits above — abstract
+inputs/outputs, named invariants, swappable implementations — but live in the
+algorithm subfolders because they serve the algorithm layer specifically.

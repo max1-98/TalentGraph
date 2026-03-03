@@ -71,3 +71,12 @@ tensor-level features and outcome labels only.
 There is an inherent delay between a search and its outcome (hiring decisions
 take days to weeks). The system operates on a nightly or weekly batch cycle,
 not real-time. This is acceptable because weight drift is gradual.
+
+## Relationship to Market Signals
+
+Aggregated outcome data serves a dual purpose. Beyond feeding the LTR weight
+system, it also supplies the **MarketSignalProvider** building block (see
+`algorithm/overview.md`) — a sibling projection of the same data that computes
+skill demand frequencies, salary range distributions, and growth trends. These
+market signals drive gap prioritisation, career path feasibility scoring, and
+demand-based enrichment targeting.

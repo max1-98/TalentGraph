@@ -64,7 +64,7 @@ The core module (traits + types) is the leaf. Everything depends on it, it
 depends on nothing.
 
 ```
-              tg-core (traits + types)
+              tg-core (traits + types + schema)
                    |
     +---------+----+----+---------+---------+---------+
     |         |         |         |         |         |
@@ -78,9 +78,22 @@ depends on nothing.
               ONLY place with concrete types
 ```
 
+The schema sublayer within tg-core (`core/schema/`) defines all Tier 2 and
+Tier 3 types — the shapes that cross service boundaries. Internal types
+(Tier 1) remain in `core/types.md`. See `core/schema/overview.md` for the
+full shared schema design.
+
 Scorers do not depend on storage or filter. Scorers compile and test with
 zero infrastructure. The composition root is the only module that imports
 concrete implementations.
+
+The **algorithm layer** (see `algorithm/overview.md`) sits above tg-pipeline
+and depends on tg-core. It introduces five shared building-block traits
+(SkillResolver, TaxonomyGraph, RoleContextAnalyser, ProfileComparator,
+MarketSignalProvider) and seven algorithms. Algorithm modules follow the same
+dependency inversion pattern: each depends on traits from tg-core and from
+the shared building blocks, never on sibling algorithm implementations.
+Concrete wiring lives in the composition root (see `composition.md`).
 
 ## Change Impact Summary
 

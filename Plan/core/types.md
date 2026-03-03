@@ -87,3 +87,28 @@ The vector of learned (or hand-tuned) parameters consumed by the scoring stage:
 - Embedding perspective scaling factors (beta1 through beta4)
 - Decay and penalty curve parameters (recency lambda, seniority sigma, etc.)
 - Scoped by query cluster: different verticals may use different weight sets
+
+---
+
+## Relationship to the Shared Schema
+
+All types in this file are **Tier 1 — engine-internal**. They are optimised for
+memory layout and compute speed and never cross a service boundary directly.
+Types that cross the API-to-frontend or API-to-engine boundary are defined in
+`schema/` (see `schema/overview.md`). The engine implements mapping functions
+between Tier 1 types here and the Tier 2/3 projections in the shared schema.
+
+## Data Origin and Evolution
+
+CandidateTensor is not created in one step — it evolves through the algorithm
+layer:
+
+1. **CV-to-Profile** (`algorithm/cv-to-profile/overview.md`) creates the
+   initial tensor from an unstructured CV
+2. **Profile Enrichment** (`algorithm/profile-enrichment/overview.md`) augments
+   it with external signals, adding skills and raising confidence
+3. The **confidence** field (0–1) reflects the tensor's extraction and
+   enrichment state — low after a sparse CV parse, higher after corroboration
+4. The **last_recomputed** timestamp enables staleness detection: when the
+   taxonomy or embedding model changes, tensors older than the change are
+   candidates for re-tensoring (see `algorithm/versioning.md`)
